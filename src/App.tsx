@@ -3,6 +3,7 @@ import { BmoConsole, Expression } from './components/BmoConsole';
 import { UsbStatusPanel } from './components/UsbStatusPanel';
 import { BmoAlarmRingingModal } from './components/BmoAlarmRingingModal';
 import { BmoInteriorBackground } from './components/BmoInteriorBackground';
+import { BmoOnboardingModal } from './components/BmoOnboardingModal';
 import { BmoCustomization, BmoAlarm, AlarmSound, BmoPowerSettings, ScreenTimeoutOption } from './types';
 
 export default function App() {
@@ -149,6 +150,26 @@ export default function App() {
     };
   });
 
+  // Onboarding Modal State for First Access
+  const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('bmo_onboarding_completed') !== 'true';
+    } catch (e) {
+      return true;
+    }
+  });
+
+  const handleCompleteOnboarding = (newCustomization: BmoCustomization) => {
+    setCustomization(newCustomization);
+    try {
+      localStorage.setItem('bmo_onboarding_completed', 'true');
+    } catch (e) {}
+    setShowOnboardingModal(false);
+    setActiveExpression('excited');
+    playSound('click');
+    addLog(`✨ Primeiro Acesso: BMO personalizado como ${newCustomization.gender === 'girl' ? 'Menina' : 'Menino'} (${newCustomization.theme})`);
+  };
+
   useEffect(() => {
     try {
       localStorage.setItem('bmo_customization', JSON.stringify(customization));
@@ -184,7 +205,7 @@ export default function App() {
   const lastAlarmTriggerKeyRef = useRef<string>('');
 
   // Internet & Priority Update States
-  const LATEST_SERVER_VERSION = '1.4.0';
+  const LATEST_SERVER_VERSION = '1.5.1';
 
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
@@ -951,6 +972,7 @@ export default function App() {
               playSound('click');
               setCustomization(newCust);
             }}
+            onOpenOnboarding={() => setShowOnboardingModal(true)}
             canInstallPwa={Boolean(installPrompt)}
             onInstallPwa={handleInstallPwa}
             keepScreenOn={keepScreenOn}
@@ -979,6 +1001,13 @@ export default function App() {
           bmoName={customization.name}
         />
       )}
+
+      {/* ONBOARDING MODAL FOR FIRST ACCESS */}
+      <BmoOnboardingModal
+        isOpen={showOnboardingModal}
+        onComplete={handleCompleteOnboarding}
+        initialCustomization={customization}
+      />
     </div>
   );
 }

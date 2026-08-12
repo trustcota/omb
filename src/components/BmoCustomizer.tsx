@@ -5,11 +5,13 @@ import { BmoCustomization, BmoGender, BmoAccessory, BmoTheme } from '../types';
 interface BmoCustomizerProps {
   customization: BmoCustomization;
   onChangeCustomization: (newCustomization: BmoCustomization) => void;
+  onOpenOnboarding?: () => void;
 }
 
 export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
   customization,
   onChangeCustomization,
+  onOpenOnboarding,
 }) => {
   const handleGenderChange = (gender: BmoGender) => {
     onChangeCustomization({
@@ -215,6 +217,20 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
           })}
         </div>
       </div>
+
+      {/* 5. RE-RUN ONBOARDING ASSISTANT */}
+      {onOpenOnboarding && (
+        <div className="pt-2 border-t border-slate-100">
+          <button
+            type="button"
+            onClick={onOpenOnboarding}
+            className="w-full py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition-all border border-slate-200 text-xs flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-teal-600" />
+            Refazer Assistente de Primeiro Acesso
+          </button>
+        </div>
+      )}
     </div>
   );
 };

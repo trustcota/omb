@@ -48,6 +48,7 @@ interface UsbStatusPanelProps {
   updateCheckResultText?: string | null;
   customization: BmoCustomization;
   onChangeCustomization: (newCustomization: BmoCustomization) => void;
+  onOpenOnboarding?: () => void;
   canInstallPwa?: boolean;
   onInstallPwa?: () => void;
   keepScreenOn?: boolean;
@@ -82,6 +83,7 @@ export const UsbStatusPanel: React.FC<UsbStatusPanelProps> = ({
   updateCheckResultText,
   customization,
   onChangeCustomization,
+  onOpenOnboarding,
   canInstallPwa = false,
   onInstallPwa,
   keepScreenOn = true,
@@ -225,6 +227,7 @@ export const UsbStatusPanel: React.FC<UsbStatusPanelProps> = ({
         <BmoCustomizer
           customization={customization}
           onChangeCustomization={onChangeCustomization}
+          onOpenOnboarding={onOpenOnboarding}
         />
       )}
 
