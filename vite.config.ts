@@ -4,8 +4,8 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
-  const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : '';
-  const basePath = repoName ? `/${repoName}/` : './';
+  const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : 'omb';
+  const basePath = process.env.NODE_ENV === 'production' ? `/${repoName}/` : './';
 
   return {
     base: basePath,

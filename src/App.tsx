@@ -205,7 +205,7 @@ export default function App() {
   const lastAlarmTriggerKeyRef = useRef<string>('');
 
   // Internet & Priority Update States
-  const LATEST_SERVER_VERSION = '1.5.1';
+  const LATEST_SERVER_VERSION = '1.5.2';
 
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
