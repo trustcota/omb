@@ -1,0 +1,6 @@
+{
+  "name": "BMO USB",
+  "description": "Rosto interativo do BMO que reage ao nível da bateria e conexões USB.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

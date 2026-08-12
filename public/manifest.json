@@ -1,0 +1,18 @@
+{
+  "short_name": "BMO USB",
+  "name": "BMO USB Detector",
+  "icons": [
+    {
+      "src": "/bmo-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a2628",
+  "theme_color": "#5ed2bd",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait"
+}
