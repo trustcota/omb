@@ -205,7 +205,7 @@ export default function App() {
   const lastAlarmTriggerKeyRef = useRef<string>('');
 
   // Internet & Priority Update States
-  const LATEST_SERVER_VERSION = '1.5.5';
+  const LATEST_SERVER_VERSION = '1.5.6';
 
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
@@ -895,7 +895,8 @@ export default function App() {
       {!showDetails ? (
         /* FULLSCREEN BMO FACE ONLY */
         <BmoConsole
-          isConnected={isConnected || isCharging}
+          isConnected={isConnected}
+          isCharging={isCharging}
           batteryLevel={batteryLevel}
           deviceName={deviceName}
           manualExpression={activeExpression}

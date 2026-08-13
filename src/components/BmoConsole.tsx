@@ -7,6 +7,7 @@ export type Expression = 'happy' | 'excited' | 'sad' | 'sleepy' | 'surprised' | 
 
 interface BmoConsoleProps {
   isConnected: boolean;
+  isCharging?: boolean;
   batteryLevel?: number; // 0 to 100
   deviceName?: string | null;
   manualExpression?: Expression;
@@ -24,6 +25,7 @@ interface BmoConsoleProps {
 
 export const BmoConsole: React.FC<BmoConsoleProps> = ({
   isConnected,
+  isCharging = false,
   batteryLevel = 100,
   manualExpression,
   onFaceTap,
@@ -87,10 +89,10 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
   const getDefaultExpression = (): Expression => {
     if (isUpdating) return 'updating';
     if (isSleeping) return 'sleepy';
-    if (!isConnected) return 'sad';
-    if (batteryLevel <= 20) return 'sleepy';
-    if (batteryLevel <= 50) return 'happy';
-    return 'excited';
+    if (batteryLevel <= 10) return 'sleepy';
+    if (batteryLevel <= 30) return 'happy';
+    if (isConnected || isCharging) return 'excited';
+    return 'happy';
   };
 
   const currentExpression: Expression = isUpdating ? 'updating' : (manualExpression || getDefaultExpression());
@@ -113,7 +115,7 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
       };
     }
 
-    if (!isConnected) {
+    if (currentExpression === 'sad') {
       return {
         bg: 'from-[#142828] via-[#1a3636] to-[#254646]',
         faceColor: '#5c8c8c',
@@ -121,17 +123,11 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
       };
     }
 
-    if (batteryLevel <= 20) {
+    if (batteryLevel <= 15 && !isConnected && !isCharging) {
       return {
         bg: 'from-[#4a1c1d] via-[#6e2226] to-[#8d2a2e]',
         faceColor: '#ff9999',
         cheekColor: '#cc3333',
-      };
-    } else if (batteryLevel <= 50) {
-      return {
-        bg: 'from-[#f4a261] via-[#e76f51] to-[#d4a373]',
-        faceColor: '#4a2c00',
-        cheekColor: '#ffb703',
       };
     }
 
@@ -399,6 +395,20 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
               <path d="M 30 50 Q 45 38 60 50" />
               <path d="M 140 50 Q 155 38 170 50" />
             </g>
+          ) : currentExpression === 'sad' ? (
+            <g fill={style.faceColor}>
+              {/* Sad drooping eyes with blue tear */}
+              <circle cx="45" cy="45" r="10" />
+              <ellipse cx="37" cy="59" rx="2.5" ry="5" fill="#60a5fa" />
+              <circle cx="155" cy="45" r="10" />
+            </g>
+          ) : currentExpression === 'surprised' ? (
+            <g fill={style.faceColor}>
+              <circle cx="45" cy="42" r="14" />
+              <circle cx="155" cy="42" r="14" />
+              <circle cx="48" cy="39" r="4" fill="#ffffff" />
+              <circle cx="158" cy="39" r="4" fill="#ffffff" />
+            </g>
           ) : (
             <g fill={style.faceColor}>
               {/* Cute Girl Eyelashes */}
@@ -428,14 +438,15 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
                   strokeLinecap="round"
                 />
               ) : currentExpression === 'excited' ? (
-                <circle cx="45" cy="42" r="15" />
-              ) : !isConnected ? (
                 <g>
-                  <circle cx="45" cy="45" r="10" />
-                  <ellipse cx="37" cy="59" rx="2.5" ry="5" fill="#60a5fa" />
+                  <circle cx="45" cy="42" r="15" />
+                  <circle cx="49" cy="38" r="4.5" fill="#ffffff" />
                 </g>
               ) : (
-                <circle cx="45" cy="42" r="12" />
+                <g>
+                  <circle cx="45" cy="42" r="12" />
+                  <circle cx="48" cy="39" r="3.5" fill="#ffffff" opacity="0.9" />
+                </g>
               )}
 
               {/* Right Eye */}
@@ -450,11 +461,15 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
                   strokeLinecap="round"
                 />
               ) : currentExpression === 'excited' ? (
-                <circle cx="155" cy="42" r="15" />
-              ) : !isConnected ? (
-                <circle cx="155" cy="45" r="10" />
+                <g>
+                  <circle cx="155" cy="42" r="15" />
+                  <circle cx="159" cy="38" r="4.5" fill="#ffffff" />
+                </g>
               ) : (
-                <circle cx="155" cy="42" r="12" />
+                <g>
+                  <circle cx="155" cy="42" r="12" />
+                  <circle cx="158" cy="39" r="3.5" fill="#ffffff" opacity="0.9" />
+                </g>
               )}
             </g>
           )}
@@ -515,29 +530,30 @@ export const BmoConsole: React.FC<BmoConsoleProps> = ({
               strokeWidth="6"
               strokeLinecap="round"
             />
-          ) : isConnected ? (
-            currentExpression === 'excited' ? (
-              <g>
-                <path d="M 65 65 Q 100 105 135 65 Z" fill={style.faceColor} />
-                <path d="M 80 82 Q 100 98 120 82 Q 100 72 80 82 Z" fill="#ff80ab" />
-              </g>
-            ) : currentExpression === 'sleepy' ? (
-              <circle cx="100" cy="72" r="7" fill="none" stroke={style.faceColor} strokeWidth="5" />
-            ) : (
-              <path
-                d="M 72 68 Q 100 92 128 68"
-                fill="none"
-                stroke={style.faceColor}
-                strokeWidth="7"
-                strokeLinecap="round"
-              />
-            )
-          ) : (
+          ) : currentExpression === 'excited' ? (
+            <g>
+              <path d="M 65 65 Q 100 105 135 65 Z" fill={style.faceColor} />
+              <path d="M 80 82 Q 100 98 120 82 Q 100 72 80 82 Z" fill="#ff80ab" />
+            </g>
+          ) : currentExpression === 'sleepy' ? (
+            <circle cx="100" cy="72" r="7" fill="none" stroke={style.faceColor} strokeWidth="5" />
+          ) : currentExpression === 'surprised' ? (
+            <circle cx="100" cy="72" r="9" fill="none" stroke={style.faceColor} strokeWidth="6" />
+          ) : currentExpression === 'sad' ? (
             <path
               d="M 78 78 Q 100 62 122 78"
               fill="none"
               stroke={style.faceColor}
               strokeWidth="6"
+              strokeLinecap="round"
+            />
+          ) : (
+            /* HAPPY SMILING MOUTH */
+            <path
+              d="M 72 68 Q 100 92 128 68"
+              fill="none"
+              stroke={style.faceColor}
+              strokeWidth="7"
               strokeLinecap="round"
             />
           )}

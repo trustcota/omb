@@ -19,11 +19,12 @@ export const BmoInteriorBackground: React.FC = () => {
         }}
       />
 
-      {/* Main Pixel-Art Vector Scene */}
-      <div className="relative w-full h-full max-w-4xl max-h-[90vh] flex items-center justify-center p-4">
+      {/* Main Pixel-Art Vector Scene - Responsive Containment for Mobile & Desktop */}
+      <div className="relative w-full h-full max-w-5xl max-h-[95dvh] flex items-center justify-center p-3 sm:p-6 md:p-8">
         <svg
-          viewBox="0 0 400 320"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(245,158,11,0.15)]"
+          viewBox="0 0 440 340"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-full object-contain filter drop-shadow-[0_0_30px_rgba(245,158,11,0.18)] overflow-visible"
           style={{ imageRendering: 'pixelated' }}
         >
           <defs>
@@ -50,64 +51,76 @@ export const BmoInteriorBackground: React.FC = () => {
             </linearGradient>
           </defs>
 
+          {/* 0. CORNER CHASSIS MOUNT RAILS & PCB TRACES */}
+          <g id="pcb-traces" opacity="0.4">
+            <line x1="20" y1="20" x2="60" y2="20" stroke="#0ea5e9" strokeWidth="2" strokeDasharray="4 4" />
+            <circle cx="20" cy="20" r="3" fill="#38bdf8" />
+            <line x1="420" y1="20" x2="380" y2="20" stroke="#0ea5e9" strokeWidth="2" strokeDasharray="4 4" />
+            <circle cx="420" cy="20" r="3" fill="#38bdf8" />
+            <line x1="20" y1="320" x2="60" y2="320" stroke="#0ea5e9" strokeWidth="2" strokeDasharray="4 4" />
+            <circle cx="20" cy="320" r="3" fill="#38bdf8" />
+            <line x1="420" y1="320" x2="380" y2="320" stroke="#0ea5e9" strokeWidth="2" strokeDasharray="4 4" />
+            <circle cx="420" cy="320" r="3" fill="#38bdf8" />
+          </g>
+
           {/* 1. TOP HORIZONTAL TEAL CONDUIT / PIPE */}
           <g id="top-conduit">
-            <rect x="220" y="24" width="140" height="18" fill="#134e4a" stroke="#042f2e" strokeWidth="2" rx="4" />
-            <rect x="220" y="27" width="140" height="4" fill="#2dd4bf" opacity="0.6" />
+            <rect x="220" y="24" width="165" height="18" fill="#134e4a" stroke="#042f2e" strokeWidth="2" rx="4" />
+            <rect x="220" y="27" width="165" height="4" fill="#2dd4bf" opacity="0.6" />
             {/* Pipe Joints */}
-            <rect x="330" y="20" width="10" height="26" fill="#0f766e" stroke="#042f2e" strokeWidth="2" rx="2" />
-            <circle cx="355" cy="33" r="8" fill="#0f766e" stroke="#042f2e" strokeWidth="2" />
+            <rect x="345" y="20" width="10" height="26" fill="#0f766e" stroke="#042f2e" strokeWidth="2" rx="2" />
+            <circle cx="375" cy="33" r="8" fill="#0f766e" stroke="#042f2e" strokeWidth="2" />
           </g>
 
           {/* 2. TOP-LEFT ROBOTIC COMPUTER MODULE */}
           <g id="robot-module">
             {/* Outer Gold Chassis */}
-            <rect x="52" y="10" width="136" height="74" fill="url(#goldRobotGrad)" stroke="#1e293b" strokeWidth="3" rx="2" />
-            <rect x="46" y="6" width="148" height="12" fill="#eab308" stroke="#1e293b" strokeWidth="3" rx="2" />
-            <rect x="70" y="80" width="100" height="14" fill="#ca8a04" stroke="#1e293b" strokeWidth="3" />
+            <rect x="62" y="16" width="136" height="74" fill="url(#goldRobotGrad)" stroke="#1e293b" strokeWidth="3" rx="2" />
+            <rect x="56" y="12" width="148" height="12" fill="#eab308" stroke="#1e293b" strokeWidth="3" rx="2" />
+            <rect x="80" y="86" width="100" height="14" fill="#ca8a04" stroke="#1e293b" strokeWidth="3" />
 
             {/* Blue Eye Sensors (Animated looking around) */}
             <g>
               {/* Left Eye */}
-              <circle cx="82" cy="42" r="14" fill="#0284c7" stroke="#1e293b" strokeWidth="3" />
-              <circle cx="82" cy="42" r="9" fill="#0369a1" />
+              <circle cx="92" cy="48" r="14" fill="#0284c7" stroke="#1e293b" strokeWidth="3" />
+              <circle cx="92" cy="48" r="9" fill="#0369a1" />
               <motion.circle
-                cx="82"
-                cy="42"
+                cx="92"
+                cy="48"
                 r="4"
                 fill="#0f172a"
-                animate={{ cx: [82, 84, 80, 82], cy: [42, 42, 43, 42] }}
+                animate={{ cx: [92, 94, 90, 92], cy: [48, 48, 49, 48] }}
                 transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
               />
-              <circle cx="80" cy="39" r="2" fill="#ffffff" />
+              <circle cx="90" cy="45" r="2" fill="#ffffff" />
 
               {/* Right Eye */}
-              <circle cx="158" cy="42" r="14" fill="#0284c7" stroke="#1e293b" strokeWidth="3" />
-              <circle cx="158" cy="42" r="9" fill="#0369a1" />
+              <circle cx="168" cy="48" r="14" fill="#0284c7" stroke="#1e293b" strokeWidth="3" />
+              <circle cx="168" cy="48" r="9" fill="#0369a1" />
               <motion.circle
-                cx="158"
-                cy="42"
+                cx="168"
+                cy="48"
                 r="4"
                 fill="#0f172a"
-                animate={{ cx: [158, 160, 156, 158], cy: [42, 42, 43, 42] }}
+                animate={{ cx: [168, 170, 166, 168], cy: [48, 48, 49, 48] }}
                 transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
               />
-              <circle cx="156" cy="39" r="2" fill="#ffffff" />
+              <circle cx="166" cy="45" r="2" fill="#ffffff" />
             </g>
 
             {/* Robot Module Mouth Slot */}
-            <rect x="78" y="62" width="84" height="6" fill="#0f172a" rx="1" />
+            <rect x="88" y="68" width="84" height="6" fill="#0f172a" rx="1" />
           </g>
 
           {/* 3. RAINBOW RIBBON CABLES (Yellow, Red, Cyan, Blue) */}
           <g id="ribbon-cables">
             {/* Left Wall Socket Connector */}
-            <path d="M 10 160 L 52 145 L 52 205 L 10 190 Z" fill="#0d9488" stroke="#1e293b" strokeWidth="3" />
-            <rect x="0" y="158" width="16" height="34" fill="#0f766e" stroke="#1e293b" strokeWidth="2" />
+            <path d="M 20 166 L 62 151 L 62 211 L 20 196 Z" fill="#0d9488" stroke="#1e293b" strokeWidth="3" />
+            <rect x="10" y="164" width="16" height="34" fill="#0f766e" stroke="#1e293b" strokeWidth="2" />
 
             {/* Blue Cable (Bottom) */}
             <path
-              d="M 160 94 C 160 160, 60 188, 52 195"
+              d="M 170 100 C 170 166, 70 194, 62 201"
               fill="none"
               stroke="#1d4ed8"
               strokeWidth="9"
@@ -115,7 +128,7 @@ export const BmoInteriorBackground: React.FC = () => {
             />
             {/* Cyan Cable */}
             <path
-              d="M 148 94 C 148 152, 60 178, 52 184"
+              d="M 158 100 C 158 158, 70 184, 62 190"
               fill="none"
               stroke="#0284c7"
               strokeWidth="9"
@@ -123,7 +136,7 @@ export const BmoInteriorBackground: React.FC = () => {
             />
             {/* Red / Pink Cable */}
             <path
-              d="M 136 94 C 136 144, 60 168, 52 173"
+              d="M 146 100 C 146 150, 70 174, 62 179"
               fill="none"
               stroke="#e11d48"
               strokeWidth="9"
@@ -131,7 +144,7 @@ export const BmoInteriorBackground: React.FC = () => {
             />
             {/* Yellow Cable (Top) */}
             <path
-              d="M 124 94 C 124 136, 60 156, 52 161"
+              d="M 134 100 C 134 142, 70 162, 62 167"
               fill="none"
               stroke="#facc15"
               strokeWidth="9"
@@ -139,7 +152,7 @@ export const BmoInteriorBackground: React.FC = () => {
             />
 
             {/* Cable Highlights & Pixel Ridges */}
-            <path d="M 124 94 C 124 136, 60 156, 52 161" fill="none" stroke="#fef08a" strokeWidth="2" strokeDasharray="3 3" />
+            <path d="M 134 100 C 134 142, 70 162, 62 167" fill="none" stroke="#fef08a" strokeWidth="2" strokeDasharray="3 3" />
           </g>
 
           {/* 4. TINY PINK PIKMIN-LIKE CREATURE ON CABLE */}
@@ -152,35 +165,35 @@ export const BmoInteriorBackground: React.FC = () => {
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
           >
             {/* Pikmin Body */}
-            <rect x="52" y="118" width="8" height="12" fill="#f43f5e" rx="3" stroke="#881337" strokeWidth="1.5" />
+            <rect x="62" y="124" width="8" height="12" fill="#f43f5e" rx="3" stroke="#881337" strokeWidth="1.5" />
             {/* Eye */}
-            <circle cx="55" cy="122" r="1.5" fill="#ffffff" />
-            <circle cx="55.5" cy="122" r="0.8" fill="#0f172a" />
+            <circle cx="65" cy="128" r="1.5" fill="#ffffff" />
+            <circle cx="65.5" cy="128" r="0.8" fill="#0f172a" />
             {/* Nose/Snout */}
-            <rect x="50" y="123" width="2.5" height="2" fill="#f43f5e" />
+            <rect x="60" y="129" width="2.5" height="2" fill="#f43f5e" />
             {/* Legs */}
-            <rect x="53" y="129" width="2" height="3" fill="#e11d48" />
-            <rect x="57" y="129" width="2" height="3" fill="#e11d48" />
+            <rect x="63" y="135" width="2" height="3" fill="#e11d48" />
+            <rect x="67" y="135" width="2" height="3" fill="#e11d48" />
             {/* Green Leaf Stem */}
             <motion.path
-              d="M 56 118 Q 59 110, 62 108"
+              d="M 66 124 Q 69 116, 72 114"
               fill="none"
               stroke="#15803d"
               strokeWidth="2"
               strokeLinecap="round"
-              animate={{ d: ['M 56 118 Q 59 110, 62 108', 'M 56 118 Q 54 110, 52 108', 'M 56 118 Q 59 110, 62 108'] }}
+              animate={{ d: ['M 66 124 Q 69 116, 72 114', 'M 66 124 Q 64 116, 62 114', 'M 66 124 Q 69 116, 72 114'] }}
               transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
             />
             {/* Leaf */}
-            <circle cx="62" cy="107" r="3" fill="#22c55e" stroke="#15803d" strokeWidth="1" />
+            <circle cx="72" cy="113" r="3" fill="#22c55e" stroke="#15803d" strokeWidth="1" />
           </motion.g>
 
           {/* 5. LOWER MOTHERBOARD / CARTRIDGE BOX */}
           <g id="cartridge-box">
-            <rect x="42" y="180" width="135" height="124" fill="#fef08a" stroke="#1e293b" strokeWidth="3" rx="2" />
-            <rect x="70" y="215" width="78" height="42" fill="#fef9c3" stroke="#ca8a04" strokeWidth="2" rx="2" />
+            <rect x="52" y="186" width="135" height="124" fill="#fef08a" stroke="#1e293b" strokeWidth="3" rx="2" />
+            <rect x="80" y="221" width="78" height="42" fill="#fef9c3" stroke="#ca8a04" strokeWidth="2" rx="2" />
             {/* Golden Bowtie / Hourglass emblem */}
-            <g transform="translate(109, 236)">
+            <g transform="translate(119, 242)">
               <polygon points="-16,-8 0,0 -16,8" fill="#d97706" stroke="#92400e" strokeWidth="1.5" />
               <polygon points="16,-8 0,0 16,8" fill="#d97706" stroke="#92400e" strokeWidth="1.5" />
               <circle cx="0" cy="0" r="4.5" fill="#f59e0b" stroke="#92400e" strokeWidth="1.5" />
@@ -188,7 +201,7 @@ export const BmoInteriorBackground: React.FC = () => {
           </g>
 
           {/* 6. BMO GOLDEN BATTERY */}
-          <g id="bmo-battery" transform="translate(190, 185)">
+          <g id="bmo-battery" transform="translate(200, 191)">
             {/* Battery Top Terminal */}
             <rect x="22" y="-12" width="18" height="14" fill="#d97706" stroke="#1e293b" strokeWidth="2.5" rx="2" />
             <rect x="25" y="-15" width="12" height="4" fill="#fbbf24" />
@@ -211,7 +224,7 @@ export const BmoInteriorBackground: React.FC = () => {
           </g>
 
           {/* 7. GREEN CAPACITORS BESIDE BATTERY */}
-          <g id="capacitors" transform="translate(266, 260)">
+          <g id="capacitors" transform="translate(276, 266)">
             <rect x="0" y="0" width="12" height="45" fill="#047857" stroke="#1e293b" strokeWidth="2" rx="3" />
             <rect x="2" y="3" width="3" height="38" fill="#34d399" opacity="0.7" rx="1" />
 
@@ -220,7 +233,7 @@ export const BmoInteriorBackground: React.FC = () => {
           </g>
 
           {/* 8. PIPES & VALVE UNDER HEART */}
-          <g id="heart-pipes" transform="translate(295, 160)">
+          <g id="heart-pipes" transform="translate(305, 166)">
             {/* Funnel Receptor under Heart */}
             <polygon points="12,0 48,0 42,20 18,20" fill="#78350f" stroke="#1e293b" strokeWidth="2.5" />
             <rect x="16" y="20" width="28" height="8" fill="#b45309" stroke="#1e293b" strokeWidth="2" />
@@ -250,15 +263,15 @@ export const BmoInteriorBackground: React.FC = () => {
           {/* 9. THE BIG GOLDEN GLOWING SMILING HEART */}
           <motion.g
             id="golden-heart"
-            transform="translate(290, 115)"
+            transform="translate(325, 110)"
             animate={{
-              scale: [1, 1.07, 1, 1.05, 1],
+              scale: [1, 1.06, 1, 1.04, 1],
               filter: [
-                'drop-shadow(0 0 12px rgba(251,191,36,0.6))',
-                'drop-shadow(0 0 24px rgba(251,191,36,0.9))',
-                'drop-shadow(0 0 12px rgba(251,191,36,0.6))',
-                'drop-shadow(0 0 20px rgba(251,191,36,0.8))',
-                'drop-shadow(0 0 12px rgba(251,191,36,0.6))',
+                'drop-shadow(0 0 10px rgba(251,191,36,0.6))',
+                'drop-shadow(0 0 20px rgba(251,191,36,0.9))',
+                'drop-shadow(0 0 10px rgba(251,191,36,0.6))',
+                'drop-shadow(0 0 18px rgba(251,191,36,0.8))',
+                'drop-shadow(0 0 10px rgba(251,191,36,0.6))',
               ],
             }}
             transition={{
@@ -338,7 +351,7 @@ export const BmoInteriorBackground: React.FC = () => {
           {/* 10. MULTICOLOR TWINKLING 4-POINT SPARKLE STARS */}
           {/* Bottom Star near Bow */}
           <motion.g
-            transform="translate(345, 290)"
+            transform="translate(390, 290)"
             animate={{
               scale: [0.6, 1.3, 0.6],
               rotate: [0, 90, 180],
@@ -357,7 +370,7 @@ export const BmoInteriorBackground: React.FC = () => {
 
           {/* Top Star near Heart */}
           <motion.g
-            transform="translate(235, 100)"
+            transform="translate(230, 95)"
             animate={{
               scale: [1.2, 0.5, 1.2],
               rotate: [0, 45, 90],
@@ -370,7 +383,7 @@ export const BmoInteriorBackground: React.FC = () => {
 
           {/* Left Star near Cable */}
           <motion.g
-            transform="translate(40, 90)"
+            transform="translate(42, 85)"
             animate={{
               scale: [0.7, 1.2, 0.7],
               opacity: [0.4, 1, 0.4],
