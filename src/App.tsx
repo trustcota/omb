@@ -205,7 +205,7 @@ export default function App() {
   const lastAlarmTriggerKeyRef = useRef<string>('');
 
   // Internet & Priority Update States
-  const LATEST_SERVER_VERSION = '1.5.3';
+  const LATEST_SERVER_VERSION = '1.5.4';
 
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
@@ -550,7 +550,7 @@ export default function App() {
           try {
             new Notification(`⏰ Alarme do ${customization.name || 'BMO'}!`, {
               body: matchingAlarm.label,
-              icon: '/bmo-icon.svg',
+              icon: `${import.meta.env.BASE_URL}bmo-icon.svg`,
             });
           } catch (e) {}
         }

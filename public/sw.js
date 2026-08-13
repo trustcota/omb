@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bmo-usb-cache-v1.5.3';
+const CACHE_NAME = 'bmo-usb-cache-v1.5.4';
 const ASSETS_TO_CACHE = [
   './',
   './manifest.json',

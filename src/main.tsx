@@ -6,7 +6,8 @@ import './index.css';
 // Register Service Worker for Offline PWA Mode
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then((reg) => {
+    const swUrl = `${import.meta.env.BASE_URL}sw.js`;
+    navigator.serviceWorker.register(swUrl).then((reg) => {
       console.log('BMO Offline ServiceWorker registrado com sucesso:', reg.scope);
     }).catch((err) => {
       console.warn('Falha ao registrar ServiceWorker:', err);
