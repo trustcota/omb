@@ -1,8 +1,9 @@
-const CACHE_NAME = 'bmo-usb-cache-v1.5.2';
+const CACHE_NAME = 'bmo-usb-cache-v1.5.3';
 const ASSETS_TO_CACHE = [
   './',
   './manifest.json',
-  './version.json'
+  './version.json',
+  './bmo-icon.svg'
 ];
 
 // Message event - support immediate skip waiting command from app

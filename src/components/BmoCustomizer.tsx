@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Shirt, Palette, Check, Sparkles, Heart } from 'lucide-react';
+import { User, Shirt, Palette, Check, Sparkles } from 'lucide-react';
 import { BmoCustomization, BmoGender, BmoAccessory, BmoTheme } from '../types';
 
 interface BmoCustomizerProps {
@@ -52,9 +52,9 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
   const activeThemeObj = themes.find((t) => t.key === customization.theme) || themes[0];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-100">
       {/* 1. VISUAL LIVE PREVIEW MINI CARD */}
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-4 border border-slate-700/80 shadow-lg flex items-center justify-between gap-4">
+      <div className="bg-gradient-to-br from-slate-950 to-slate-900 rounded-2xl p-4 border border-slate-800 shadow-lg flex items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-500/20 text-teal-300 text-[11px] font-bold font-mono">
             <Sparkles className="w-3 h-3 text-teal-300" />
@@ -96,8 +96,8 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
 
       {/* 2. GÊNERO / PERSONAGEM */}
       <div className="space-y-2.5">
-        <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-          <User className="w-4 h-4 text-teal-600" />
+        <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+          <User className="w-4 h-4 text-teal-400" />
           Escolha o Personagem
         </label>
 
@@ -108,21 +108,21 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
             onClick={() => handleGenderChange('boy')}
             className={`relative p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center gap-3 ${
               customization.gender === 'boy'
-                ? 'bg-sky-50 border-sky-500 text-sky-950 shadow-md ring-2 ring-sky-300'
-                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                ? 'bg-sky-950/70 border-sky-400 text-sky-200 shadow-md ring-1 ring-sky-400'
+                : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:bg-slate-900'
             }`}
           >
-            <div className="w-12 h-12 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-sky-900/60 border border-sky-700/60 flex items-center justify-center text-2xl shrink-0 shadow-sm">
               👦
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-bold text-sm flex items-center gap-1">
+              <div className="font-bold text-sm flex items-center gap-1 text-white">
                 Menino
                 {customization.gender === 'boy' && (
-                  <Check className="w-4 h-4 text-sky-600 ml-auto shrink-0" />
+                  <Check className="w-4 h-4 text-sky-400 ml-auto shrink-0" />
                 )}
               </div>
-              <div className="text-[11px] text-slate-500 font-medium">BMO Clássico</div>
+              <div className="text-[11px] text-slate-400 font-medium">BMO Clássico</div>
             </div>
           </button>
 
@@ -132,21 +132,21 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
             onClick={() => handleGenderChange('girl')}
             className={`relative p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center gap-3 ${
               customization.gender === 'girl'
-                ? 'bg-pink-50 border-pink-500 text-pink-950 shadow-md ring-2 ring-pink-300'
-                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                ? 'bg-pink-950/70 border-pink-400 text-pink-200 shadow-md ring-1 ring-pink-400'
+                : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:bg-slate-900'
             }`}
           >
-            <div className="w-12 h-12 rounded-xl bg-pink-100 border border-pink-200 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-pink-900/60 border border-pink-700/60 flex items-center justify-center text-2xl shrink-0 shadow-sm">
               👧
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-bold text-sm flex items-center gap-1">
+              <div className="font-bold text-sm flex items-center gap-1 text-white">
                 Menina
                 {customization.gender === 'girl' && (
-                  <Check className="w-4 h-4 text-pink-600 ml-auto shrink-0" />
+                  <Check className="w-4 h-4 text-pink-400 ml-auto shrink-0" />
                 )}
               </div>
-              <div className="text-[11px] text-pink-600 font-medium">Cílios & Laço 🎀</div>
+              <div className="text-[11px] text-pink-400 font-medium">Cílios & Laço 🎀</div>
             </div>
           </button>
         </div>
@@ -154,8 +154,8 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
 
       {/* 3. ACESSÓRIOS */}
       <div className="space-y-2.5">
-        <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-          <Shirt className="w-4 h-4 text-purple-600" />
+        <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+          <Shirt className="w-4 h-4 text-purple-400" />
           Acessórios
         </label>
 
@@ -169,16 +169,16 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
                 onClick={() => handleAccessoryChange(acc.key)}
                 className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-teal-50 border-teal-500 text-teal-950 font-bold shadow-sm ring-1 ring-teal-400'
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                    ? 'bg-teal-950/80 border-teal-400 text-teal-200 font-bold shadow-sm ring-1 ring-teal-400'
+                    : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-900'
                 }`}
               >
                 <span className="text-xl shrink-0">{acc.icon}</span>
                 <div className="min-w-0 flex-1">
-                  <div className="text-xs font-bold truncate">{acc.label}</div>
+                  <div className="text-xs font-bold truncate text-white">{acc.label}</div>
                   <div className="text-[10px] text-slate-400 font-normal truncate">{acc.desc}</div>
                 </div>
-                {isSelected && <Check className="w-4 h-4 text-teal-600 shrink-0 ml-auto" />}
+                {isSelected && <Check className="w-4 h-4 text-teal-400 shrink-0 ml-auto" />}
               </button>
             );
           })}
@@ -187,8 +187,8 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
 
       {/* 4. TEMAS DE COR */}
       <div className="space-y-2.5">
-        <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-          <Palette className="w-4 h-4 text-amber-500" />
+        <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+          <Palette className="w-4 h-4 text-amber-400" />
           Cor do Display do BMO
         </label>
 
@@ -202,14 +202,14 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
                 onClick={() => handleThemeChange(thm.key)}
                 className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                   isSelected
-                    ? 'bg-slate-900 border-slate-900 text-white font-bold shadow-md'
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                    ? 'bg-teal-500/20 border-teal-400 text-white font-bold shadow-md ring-1 ring-teal-400'
+                    : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-900'
                 }`}
               >
                 <div
-                  className={`w-7 h-7 rounded-full bg-gradient-to-r ${thm.gradient} shrink-0 border border-black/10 shadow-sm flex items-center justify-center`}
+                  className={`w-7 h-7 rounded-full bg-gradient-to-r ${thm.gradient} shrink-0 border border-white/20 shadow-sm flex items-center justify-center`}
                 >
-                  {isSelected && <Check className="w-4 h-4 text-slate-900 stroke-[3]" />}
+                  {isSelected && <Check className="w-4 h-4 text-slate-950 stroke-[3]" />}
                 </div>
                 <span className="text-xs font-bold flex-1">{thm.label}</span>
               </button>
@@ -220,13 +220,13 @@ export const BmoCustomizer: React.FC<BmoCustomizerProps> = ({
 
       {/* 5. RE-RUN ONBOARDING ASSISTANT */}
       {onOpenOnboarding && (
-        <div className="pt-2 border-t border-slate-100">
+        <div className="pt-2 border-t border-slate-800">
           <button
             type="button"
             onClick={onOpenOnboarding}
-            className="w-full py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition-all border border-slate-200 text-xs flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3 px-4 bg-slate-950/80 hover:bg-slate-900 text-teal-300 font-bold rounded-2xl transition-all border border-teal-500/30 text-xs flex items-center justify-center gap-2 cursor-pointer shadow-sm"
           >
-            <Sparkles className="w-4 h-4 text-teal-600" />
+            <Sparkles className="w-4 h-4 text-teal-400" />
             Refazer Assistente de Primeiro Acesso
           </button>
         </div>

@@ -1,3 +1,5 @@
+export type Expression = 'happy' | 'excited' | 'sad' | 'sleepy' | 'surprised' | 'love' | 'updating';
+
 export type BmoGender = 'boy' | 'girl';
 
 export type BmoAccessory = 'none' | 'bowtie' | 'hairbow';
@@ -17,6 +19,8 @@ export interface BmoPowerSettings {
   timeoutCharging: ScreenTimeoutOption; // seconds when plugged in
   timeoutBattery: ScreenTimeoutOption;  // seconds when on battery
 }
+
+export type PowerManagementSettings = BmoPowerSettings;
 
 export type AlarmSound = 'bmo_chime' | 'game_8bit' | 'sing_song' | 'digital';
 

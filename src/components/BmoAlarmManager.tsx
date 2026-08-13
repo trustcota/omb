@@ -11,7 +11,6 @@ import {
   Sparkles,
   Calendar,
   Music,
-  Info,
 } from 'lucide-react';
 import { BmoAlarm, AlarmSound } from '../types';
 
@@ -67,6 +66,8 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!time) return;
+
     onAddAlarm({
       time,
       label: label.trim() || 'Alarme do BMO',
@@ -74,11 +75,12 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
       days: selectedDays,
       sound,
     });
-    setLabel('');
+
     setShowAddForm(false);
+    setLabel('');
   };
 
-  // Calculate time remaining until next alarm
+  // Calculate next alarm countdown info
   const getNextAlarmText = () => {
     const activeAlarms = alarms.filter((a) => a.enabled);
     if (activeAlarms.length === 0) return null;
@@ -117,16 +119,16 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
   const nextAlarmInfo = getNextAlarmText();
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 text-slate-100">
       {/* HEADER BANNER */}
-      <div className="bg-gradient-to-r from-amber-500/10 via-teal-500/10 to-amber-500/10 border border-amber-200/80 rounded-2xl p-4 flex items-center justify-between gap-3">
+      <div className="bg-slate-950/60 border border-amber-500/30 rounded-2xl p-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-amber-400/20 border border-amber-400/40 text-amber-700 flex items-center justify-center shrink-0">
-            <AlarmClock className="w-5 h-5 text-amber-600" />
+          <div className="w-10 h-10 rounded-2xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shrink-0">
+            <AlarmClock className="w-5 h-5 text-amber-400" />
           </div>
           <div>
-            <h4 className="text-xs font-bold text-slate-900">Alarme Inteligente do BMO</h4>
-            <p className="text-[11px] text-slate-500">
+            <h4 className="text-xs font-bold text-white">Alarme Inteligente do BMO</h4>
+            <p className="text-[11px] text-slate-400">
               Desperte com os sons e vibrações do BMO
             </p>
           </div>
@@ -139,18 +141,18 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
             onClick={requestNotificationPermission}
             className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer shrink-0 flex items-center gap-1.5 ${
               notificationPermission === 'granted'
-                ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                : 'bg-amber-100 border-amber-300 text-amber-900 shadow-sm'
+                ? 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300'
+                : 'bg-amber-400 text-slate-950 border-amber-300 shadow-sm'
             }`}
           >
             {notificationPermission === 'granted' ? (
               <>
-                <Bell className="w-3.5 h-3.5 text-emerald-600" />
+                <Bell className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Notificações Ativas</span>
               </>
             ) : (
               <>
-                <BellOff className="w-3.5 h-3.5 text-amber-600" />
+                <BellOff className="w-3.5 h-3.5 text-slate-950" />
                 <span>Ativar Notificações</span>
               </>
             )}
@@ -160,7 +162,7 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
 
       {/* NEXT UPCOMING ALARM COUNTDOWN BANNER */}
       {nextAlarmInfo && (
-        <div className="bg-slate-900 text-white border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-md">
+        <div className="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between shadow-md">
           <div className="flex items-center gap-2.5">
             <Clock className="w-4 h-4 text-amber-400 shrink-0 animate-pulse" />
             <div>
@@ -181,22 +183,22 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
         <button
           type="button"
           onClick={() => setShowAddForm(true)}
-          className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 text-xs cursor-pointer"
+          className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 px-4 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 text-xs cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Criar Novo Alarme</span>
         </button>
       ) : (
-        <form onSubmit={handleSubmit} className="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 space-y-4 shadow-sm">
-          <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-            <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-amber-500" />
+        <form onSubmit={handleSubmit} className="bg-slate-950/70 border border-slate-800 rounded-2xl p-4 space-y-4 shadow-sm">
+          <div className="flex justify-between items-center border-b border-slate-800 pb-2">
+            <span className="text-xs font-extrabold text-white flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-amber-400" />
               Novo Alarme do BMO
             </span>
             <button
               type="button"
               onClick={() => setShowAddForm(false)}
-              className="text-xs text-slate-400 hover:text-slate-600 font-bold"
+              className="text-xs text-slate-400 hover:text-slate-200 font-bold"
             >
               Cancelar
             </button>
@@ -205,32 +207,32 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
           {/* Time Picker & Label */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-[11px] font-bold text-slate-700 block mb-1">Horário</label>
+              <label className="text-[11px] font-bold text-slate-300 block mb-1">Horário</label>
               <input
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 required
-                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-lg font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-lg font-mono font-bold text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-bold text-slate-700 block mb-1">Nome do Alarme</label>
+              <label className="text-[11px] font-bold text-slate-300 block mb-1">Nome do Alarme</label>
               <input
                 type="text"
                 placeholder="Ex: Hora do Lanche, Acordar..."
                 value={label}
                 onChange={(e) => setLabel(e.target.value)}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
               />
             </div>
           </div>
 
           {/* Days selector */}
           <div>
-            <label className="text-[11px] font-bold text-slate-700 block mb-1.5 flex items-center gap-1">
-              <Calendar className="w-3.5 h-3.5 text-teal-600" />
+            <label className="text-[11px] font-bold text-slate-300 block mb-1.5 flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5 text-teal-400" />
               <span>Dias de Repetição (Vazio = Uma única vez)</span>
             </label>
             <div className="flex gap-1.5">
@@ -241,8 +243,8 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                   onClick={() => toggleDay(i)}
                   className={`flex-1 py-1.5 text-[11px] font-bold rounded-xl border transition-all cursor-pointer ${
                     selectedDays.includes(i)
-                      ? 'bg-teal-600 text-white border-teal-700 shadow-sm'
-                      : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-teal-500/30 text-teal-200 border-teal-400 shadow-sm'
+                      : 'bg-slate-900 text-slate-400 border-slate-800 hover:bg-slate-800'
                   }`}
                 >
                   {name}
@@ -253,8 +255,8 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
 
           {/* Sound Selector */}
           <div>
-            <label className="text-[11px] font-bold text-slate-700 block mb-1.5 flex items-center gap-1">
-              <Music className="w-3.5 h-3.5 text-amber-500" />
+            <label className="text-[11px] font-bold text-slate-300 block mb-1.5 flex items-center gap-1">
+              <Music className="w-3.5 h-3.5 text-amber-400" />
               <span>Som do Alarme</span>
             </label>
 
@@ -264,8 +266,8 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                   key={opt.key}
                   className={`p-2.5 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                     sound === opt.key
-                      ? 'bg-amber-50 border-amber-400 text-amber-950 font-bold shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'
+                      ? 'bg-amber-400/20 border-amber-400 text-amber-200 font-bold shadow-sm'
+                      : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-800'
                   }`}
                   onClick={() => setSound(opt.key)}
                 >
@@ -280,7 +282,7 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                       onTestSound(opt.key);
                     }}
                     title="Ouvir som de teste"
-                    className="text-amber-600 hover:text-amber-800 p-1 rounded-lg hover:bg-amber-100"
+                    className="text-amber-400 hover:text-amber-300 p-1 rounded-lg hover:bg-slate-800"
                   >
                     <Volume2 className="w-3.5 h-3.5" />
                   </button>
@@ -292,7 +294,7 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
           {/* Form Submit Button */}
           <button
             type="submit"
-            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md border border-slate-700"
           >
             <Check className="w-4 h-4 text-emerald-400" />
             <span>Salvar Alarme</span>
@@ -302,9 +304,9 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
 
       {/* ALARMS LIST */}
       <div className="space-y-3">
-        <label className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center justify-between">
+        <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center justify-between">
           <span className="flex items-center gap-1.5">
-            <AlarmClock className="w-4 h-4 text-amber-500" />
+            <AlarmClock className="w-4 h-4 text-amber-400" />
             Alarmes Salvos
           </span>
           <span className="text-[10px] text-slate-400 font-mono font-normal">
@@ -313,9 +315,9 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
         </label>
 
         {alarms.length === 0 ? (
-          <div className="bg-slate-50 border border-dashed border-slate-300 rounded-2xl p-6 text-center space-y-1">
-            <p className="text-xs font-bold text-slate-600">Nenhum alarme configurado</p>
-            <p className="text-[11px] text-slate-400">Clique no botão acima para adicionar um alarme do BMO!</p>
+          <div className="bg-slate-950/60 border border-dashed border-slate-800 rounded-2xl p-6 text-center space-y-1">
+            <p className="text-xs font-bold text-slate-400">Nenhum alarme configurado</p>
+            <p className="text-[11px] text-slate-500">Clique no botão acima para adicionar um alarme do BMO!</p>
           </div>
         ) : (
           alarms.map((alarm) => {
@@ -325,21 +327,21 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                 key={alarm.id}
                 className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 shadow-sm ${
                   alarm.enabled
-                    ? 'bg-white border-slate-200/90'
-                    : 'bg-slate-50 border-slate-200 opacity-60'
+                    ? 'bg-slate-950/80 border-slate-800 text-white'
+                    : 'bg-slate-950/40 border-slate-900 text-slate-500 opacity-60'
                 }`}
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-black font-mono text-slate-900">
+                    <span className="text-2xl font-black font-mono text-white">
                       {alarm.time}
                     </span>
-                    <span className="text-xs font-extrabold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-lg border border-teal-200/60">
+                    <span className="text-xs font-extrabold text-teal-300 bg-teal-950/80 px-2 py-0.5 rounded-lg border border-teal-500/40">
                       {alarm.label}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-[10px] text-slate-500 font-medium">
+                  <div className="flex items-center gap-2 text-[10px] text-slate-400 font-medium">
                     <span>{soundOpt?.icon} {soundOpt?.label}</span>
                     <span>•</span>
                     <span>
@@ -359,8 +361,8 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                     onClick={() => onToggleAlarm(alarm.id)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                       alarm.enabled
-                        ? 'bg-emerald-500 text-slate-950 border-emerald-600 shadow-sm'
-                        : 'bg-slate-200 text-slate-500 border-slate-300'
+                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm'
+                        : 'bg-slate-800 text-slate-400 border-slate-700'
                     }`}
                   >
                     {alarm.enabled ? '🔔 Ativo' : '🔕 Inativo'}
@@ -370,7 +372,7 @@ export const BmoAlarmManager: React.FC<BmoAlarmManagerProps> = ({
                   <button
                     type="button"
                     onClick={() => onDeleteAlarm(alarm.id)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer"
+                    className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-950/50 rounded-xl transition-all cursor-pointer"
                     title="Excluir alarme"
                   >
                     <Trash2 className="w-4 h-4" />
